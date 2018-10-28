@@ -137,7 +137,7 @@ const citethis = {
      * @param {Object} data
      */
     apa: function(data) {
-      // apa specifies using not disclosed when the year is 
+      // apa specifies using not disclosed when the year is
       // unknown http://owl.english.purdue.edu/owl/resource/560/10/
       var year = !data.year || data.year == '' ? "n.d." : "$year";
 
@@ -150,9 +150,9 @@ const citethis = {
       }
     },
     harvard: function(data) {
-      var base = '$title. Available from: <$url>. [$lastAccessed].'
+      var base = '$title. Available at: <$url>. [Accessed $lastAccessed].'
       if(data.author) {
-        base ='$author. n.d., ' + base; 
+        base ='$author. ($year) ' + base;
       }
       return base;
     },
@@ -176,7 +176,7 @@ const citethis = {
 
   prefs: null,
   currentURL: '',
-  citationStyle: 'apa',
+  citationStyle: 'harvard',
   citationStyleCustom: '',
   dateformat: "MMMM dd, yyyy",
   debug: function ( msg ){
@@ -293,9 +293,19 @@ const citethis = {
           citethis.addCitationToList();
         }
       );
+
+      document.getElementById('btncleared').addEventListener(
+        'click', () => {
+          citethis.clearCitationList();
+        }
+      );
+
+
       document.getElementById('citationList').addEventListener('focus', (event) => {
         event.target.select();
       });
+
+
 
 
       if ( !console.log) {
@@ -487,7 +497,7 @@ const citethis = {
 
   getFirstElementByClass: function (className, prop) {
     prop = prop || 'innerHTML';
-    var els = citethis.doc.getElementsByClassName(className); 
+    var els = citethis.doc.getElementsByClassName(className);
     if ( els && els.length > 0 ) {
       return els[0][prop];
     }
@@ -563,7 +573,7 @@ const citethis = {
       // if host appears in title, probably should be removed.
       title = title.replace (new RegExp('\\b' + h + '\\b', 'ig'), '');
       title = title.replace (/^\W+/, ''); // replace non-word chars at beginning
-      title = title.replace(/\W+$/, ''); //replace at end 
+      title = title.replace(/\W+$/, ''); //replace at end
     }
     catch(e){console.log('error in formatTitle:'+e);}
     return title;
@@ -593,7 +603,7 @@ const citethis = {
 };
 
 // the following functions taken from datejs library, with MIT license.
-citethis.Date = {}; 
+citethis.Date = {};
 citethis.Date.CultureInfo = {
     name: "en-US",
     englishName: "English (United States)",
@@ -708,7 +718,7 @@ citethis.Date.getDaysInMonth = function (year, month) {
     return [31, (citethis.Date.isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
 };
 citethis.Date.getTimezoneOffset = function (s, dst) {
-    return (dst || false) ? citethis.Date.CultureInfo.abbreviatedTimeZoneDST[s.toUpperCase()] : 		
+    return (dst || false) ? citethis.Date.CultureInfo.abbreviatedTimeZoneDST[s.toUpperCase()] :
 		citethis.Date.CultureInfo.abbreviatedTimeZoneStandard[s.toUpperCase()];
 };
 citethis.Date.getTimezoneAbbreviation = function (offset, dst) {
