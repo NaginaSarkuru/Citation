@@ -193,13 +193,8 @@ const citethis = {
     citethis.$('citationList').value += newCitation + '\n';
   },
 
-  saveCitationfromList: function (saveCitation) {
-    saveCitation = saveCitation ||
-    console.log(`Adding citation to list: ${newCitation}`);
-    citethis.$('citationList').value += newCitation + '\n';
-  },
 
-  CopyCitationText: function myFunction() {
+  CopyCitationText: function() {
   var copyText = document.getElementById("citationList");
   copyText.select();
   document.execCommand("copy");
