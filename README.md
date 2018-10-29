@@ -10,6 +10,3 @@ https://github.com/jamiely/citethis
 Edited Source :
 https://github.com/NaginaSarkuru/Citation
 
-# New Functions 
-Copy Button | Clear Button | Citation Style 
-
