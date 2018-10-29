@@ -193,6 +193,21 @@ const citethis = {
     citethis.$('citationList').value += newCitation + '\n';
   },
 
+  saveCitationfromList: function (saveCitation) {
+    saveCitation = saveCitation ||
+    console.log(`Adding citation to list: ${newCitation}`);
+    citethis.$('citationList').value += newCitation + '\n';
+  },
+
+  CopyCitationText: function myFunction() {
+  var copyText = document.getElementById("citationList");
+  copyText.select();
+  document.execCommand("copy");
+  alert("Copied the text: " + copyText.value);
+  },
+
+
+
   getActiveTab () {
     return browser.tabs.query({
       active: true,
@@ -299,6 +314,19 @@ const citethis = {
           citethis.clearCitationList();
         }
       );
+
+      document.getElementById('btncopy').addEventListener(
+        'click', () => {
+          citethis.CopyCitationText();
+        }
+      );
+
+      document.getElementById('btnSave').addEventListener(
+        'click', () => {
+          citethis.saveCitationfromList();
+        }
+      );
+
 
 
       document.getElementById('citationList').addEventListener('focus', (event) => {
